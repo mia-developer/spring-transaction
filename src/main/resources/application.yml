@@ -1,0 +1,27 @@
+server:
+  port: 80
+spring:
+  datasource:
+    read-write:
+      hikari:
+        jdbc-url: ${DB_RW_URL}
+        username: ${DB_RW_USERNAME}
+        password: ${DB_RW_PASSWORD}
+        driver-class-name: org.h2.Driver
+        maximum-pool-size: 5
+        pool-name: "read-write-pool"
+        read-only: false
+    read-only:
+      hikari:
+        jdbc-url: ${DB_RO_URL}
+        username: ${DB_RO_USERNAME}
+        password: ${DB_RO_PASSWORD}
+        driver-class-name: org.h2.Driver
+        maximum-pool-size: 5
+        pool-name: "read-only-pool"
+        read-only: true
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
