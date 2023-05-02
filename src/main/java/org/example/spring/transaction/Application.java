@@ -1,6 +1,8 @@
 package org.example.spring.transaction;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+
 
 @SpringBootApplication
 public class Application {
