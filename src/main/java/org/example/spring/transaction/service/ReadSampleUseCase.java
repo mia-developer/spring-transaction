@@ -4,19 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.example.spring.transaction.entity.SampleEntity;
 import org.example.spring.transaction.repository.SampleRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
-public class SampleService {
+public class ReadSampleUseCase {
 
 	private final SampleRepository repository;
 
-	public SampleEntity add() {
-
-		SampleEntity entity = SampleEntity.builder().name("name").build();
-
-		return repository.save(entity);
+	public SampleEntity execute(final Long id) {
+		return repository.findFirstById(id).orElseThrow(IllegalArgumentException::new);
 	}
 }

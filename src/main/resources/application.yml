@@ -1,21 +1,21 @@
 server:
-  port: 80
+  port: 8080
 spring:
   datasource:
     read-write:
       hikari:
-        jdbc-url: ${DB_RW_URL}
-        username: ${DB_RW_USERNAME}
-        password: ${DB_RW_PASSWORD}
+        jdbc-url: ${DB_RW_URL:jdbc:mysql://localhost:4407/sample}
+        username: ${DB_RW_USERNAME:root}
+        password: ${DB_RW_PASSWORD:root}
         driver-class-name: org.h2.Driver
         maximum-pool-size: 5
         pool-name: "read-write-pool"
         read-only: false
     read-only:
       hikari:
-        jdbc-url: ${DB_RO_URL}
-        username: ${DB_RO_USERNAME}
-        password: ${DB_RO_PASSWORD}
+        jdbc-url: ${DB_RO_URL:jdbc:mysql://localhost:4407/sample}
+        username: ${DB_RO_USERNAME:root}
+        password: ${DB_RO_PASSWORD:root}
         driver-class-name: org.h2.Driver
         maximum-pool-size: 5
         pool-name: "read-only-pool"
@@ -29,5 +29,5 @@ spring:
 logging:
   level:
     org.springframework.orm.jpa: DEBUG
-    org.springframework.transaction: DEBUG
-    org.springframework.transaction.interceptor: TRACE
+    #org.springframework.transaction: DEBUG
+    #org.springframework.transaction.interceptor: TRACE
