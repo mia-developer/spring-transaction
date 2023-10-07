@@ -4,7 +4,7 @@ spring:
   datasource:
     read-write:
       hikari:
-        jdbc-url: ${DB_RW_URL:jdbc:mysql://localhost:4407/sample}
+        url: ${DB_RW_URL:jdbc:mysql://localhost:4407/sample}
         username: ${DB_RW_USERNAME:root}
         password: ${DB_RW_PASSWORD:root}
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,7 +13,7 @@ spring:
         read-only: false
     read-only:
       hikari:
-        jdbc-url: ${DB_RO_URL:jdbc:mysql://localhost:4407/sample}
+        url: ${DB_RO_URL:jdbc:mysql://localhost:4407/sample}
         username: ${DB_RO_USERNAME:root}
         password: ${DB_RO_PASSWORD:root}
         driver-class-name: com.mysql.cj.jdbc.Driver
