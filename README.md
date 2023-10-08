@@ -14,7 +14,8 @@ To build and run this Spring Boot application, follow these steps:
 
 1. Run Database with Docker Compose:
 ```bash
-docker-compose up -d
+chmod +x ./setup.sh
+./setup.sh
 ```
 
 2. Build the project using Gradle:

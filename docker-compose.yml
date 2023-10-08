@@ -1,15 +1,38 @@
 version: '3.5'
 services:
-  db:
-    container_name: mysql
+  rw-mysql:
+    container_name: rw-mysql
     image: mysql/mysql-server:8.0.30
     ports:
       - "4407:3306"
     volumes:
-      - ./mysql-init.d:/docker-entrypoint-initdb.d
-      - ./.volumes/mysql:/var/lib/mysql:rw
+      - ./docker-compose/rw/mysql-init.d:/docker-entrypoint-initdb.d
+      - ./docker-compose/rw/config:/etc/mysql/conf.d
+      - ./.volumes/rw-mysql:/var/lib/mysql
     command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--lower_case_table_names=1", ]
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_ROOT_HOST: "%"
       TZ: "Asia/Seoul"
+
+  ro-mysql:
+    container_name: ro-mysql
+    image: mysql/mysql-server:8.0.30
+    ports:
+      - "4408:3306"
+    volumes:
+      - ./docker-compose/ro/mysql-init.d:/docker-entrypoint-initdb.d
+      - ./docker-compose/ro/config:/etc/mysql/conf.d
+      - ./.volumes/ro-mysql:/var/lib/mysql
+    command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--lower_case_table_names=1", ]
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ROOT_HOST: "%"
+      TZ: "Asia/Seoul"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - rw-mysql

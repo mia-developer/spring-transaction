@@ -1,6 +1,7 @@
 package org.example.spring.transaction.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -14,8 +15,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
@@ -26,6 +29,11 @@ public class JpaDataSourceConfig {
 
 	public static final String BASE_PACKAGE = "org.example.spring.transaction";
 	public static final String PERSIST_UNIT = "samplePersistUnit";
+
+	@Bean
+	public PlatformTransactionManager transactionManager(final EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
+	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
