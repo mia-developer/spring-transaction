@@ -5,7 +5,7 @@ import org.example.spring.transaction.entity.QSampleEntity;
 import org.example.spring.transaction.entity.SampleEntity;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
-public class SampleQueryDslRepositoryImpl extends QuerydslRepositorySupport implements SampleQueryDslRepository {
+class SampleQueryDslRepositoryImpl extends QuerydslRepositorySupport implements SampleQueryDslRepository {
 
 	private final QSampleEntity sample = QSampleEntity.sampleEntity;
 
